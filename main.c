@@ -1,91 +1,87 @@
 #include "header.h"
 
 int main() {
-    List L = NULL;  // Inisialisasi list kosong
+    List L1 = NULL, L2 = NULL;
     infotype data;
     int pilihan;
-    char cariNama[50];
-    address P;
 
     do {
         TampilkanMenu();
         scanf("%d", &pilihan);
-        getchar();  // Menghindari buffer input error
+        getchar();  
 
         switch (pilihan) {
             case 1:
-                printf("Masukkan Nama: ");
+                printf("Masukan Nama: ");
                 fgets(data.nama, sizeof(data.nama), stdin);
-                data.nama[strcspn(data.nama, "\n")] = 0;  // Hapus newline
-                printf("Masukkan Nilai UTS: ");
+                data.nama[strcspn(data.nama, "\n")] = 0;
+                
+                printf("Masukan Nilai UTS: ");
                 scanf("%d", &data.nilaiUTS);
-                InsVFirst(&L, data);
+                
+                UrutanNama(&L1, data);
+                printf("Data berhasil ditambahkan.\n");
                 break;
 
             case 2:
-                printf("Masukkan Nama: ");
-                fgets(data.nama, sizeof(data.nama), stdin);
-                data.nama[strcspn(data.nama, "\n")] = 0;
-                printf("Masukkan Nilai UTS: ");
-                scanf("%d", &data.nilaiUTS);
-                InsVLast(&L, data);
+            if (L1 == NULL) {
+                printf("Daftar kosong!\n");
+            } else{ 
+                printf("Jumlah Mahasiswa: %d\n", HitungElement(L1));
+            }
                 break;
 
             case 3:
-                if (!isEmpty(L)) {
-                    DelVFirst(&L, &data);
-                    printf("Data Mahasiswa %s dihapus dari awal.\n", data.nama);
-                } else {
-                    printf("List kosong!\n");
-                }
+            if (L1 == NULL) {
+                printf("Daftar kosong!\n");
+            } else {
+                SubmenuUrutkan(&L1);
+            }
                 break;
 
             case 4:
-                if (!isEmpty(L)) {
-                    DelVLast(&L, &data);
-                    printf("Data Mahasiswa %s dihapus dari akhir.\n", data.nama);
-                } else {
-                    printf("List kosong!\n");
-                }
+                CP70(&L2, L1);
+                printf("Data dengan Nilai > 70 telah disalin.\n");
                 break;
 
             case 5:
-                printf("Masukkan Nama yang Dicari: ");
-                fgets(cariNama, sizeof(cariNama), stdin);
-                cariNama[strcspn(cariNama, "\n")] = 0;
-                data.nilaiUTS = 0;  // Tidak digunakan untuk pencarian nama
-                strcpy(data.nama, cariNama);
-
-                P = Search(L, data);
-                if (P) {
-                    printf("Mahasiswa ditemukan: %s, Nilai UTS: %d\n", P->info.nama, P->info.nilaiUTS);
+                if (L2 == NULL) {
+                    printf("Data tidak ada!\n");
                 } else {
-                    printf("Mahasiswa tidak ditemukan.\n");
+                    printf("\n=== Data tersaalin ===\n");
+                    PrintList(L2);
                 }
                 break;
 
             case 6:
-                PrintList(L);
+                RemoveDuplikat(&L2);
+                printf("Data duplikat terhapus.\n");
                 break;
 
-            case 7:
-                SubmenuUrutkan(&L);  // Pemanggilan submenu pengurutan
+            case 7: {
+                char konfirmasi;
+                printf("apakah anda ingin menghapus semua data? (y/n): ");
+                scanf(" %c", &konfirmasi);
+                if (konfirmasi == 'y' || konfirmasi == 'Y') {
+                    DeleteList(&L1);
+                    DeleteList(&L2);
+                    printf("Semua data telah dihapus.\n");
+                } else {
+                    printf("Penghapusan dibatalkan.\n");
+                }
                 break;
+            }
 
-            case 8:
-                DeleteList(&L);
-                printf("Semua data dihapus!\n");
-                break;
-
-            case 9:
+            case 0:
                 printf("Keluar dari program.\n");
+                DeleteList(&L1);
+                DeleteList(&L2);
                 break;
 
             default:
-                printf("Pilihan tidak valid! Silakan coba lagi.\n");
-                break;
+                printf("Pilihan tidak valid!\n");
         }
-    } while (pilihan != 9);
+    } while (pilihan != 0);
 
     return 0;
 }

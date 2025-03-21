@@ -30,7 +30,7 @@ void DeAlokasi(address *p);
 // Mengecek apakah list kosong
 bool isEmpty(List L);
 // Menyisipkan data secara terurut berdasarkan nama
-void InsertSortedByNama(List *L, infotype data);
+void UrutanNama(List *L, infotype data);
 // Mencetak seluruh elemen dalam list
 void PrintList(List L);
 
@@ -58,7 +58,7 @@ void DelAfter(List *L, address *Pdel, address Prec);
 void Ascending(List *L, bool byNama);
 void Descending(List *L, bool byNama);
 int HitungElement(List L);
-void CopyAtas70(List *dest, List src);
+void CP70(List *dest, List src);
 void RemoveDuplikat(List *L);
 void DeleteList(List *L);
 void TampilkanMenu();

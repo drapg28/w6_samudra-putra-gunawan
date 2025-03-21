@@ -21,7 +21,7 @@ bool isEmpty(List L) {
 }
 
 // Menyisipkan data secara terurut berdasarkan nama
-void InsertSortedByNama(List *L, infotype data) {
+void UrutanNama(List *L, infotype data) {
     address P, Prec = NULL, Q = *L;
     Create_Node(&P, data);
     if (P == NULL) return;
@@ -226,7 +226,7 @@ int HitungElement(List L) {
 }
 
 // Menyalin data mahasiswa dengan nilai >= 70 ke list baru
-void CopyAtas70(List *dest, List src) {
+void CP70(List *dest, List src) {
     infotype data;
     while (src != NULL) {
         if (src->info.nilaiUTS >= 70) {
@@ -270,17 +270,16 @@ void DeleteList(List *L) {
 
 // Menampilkan menu
 void TampilkanMenu() {
-    printf("\n===== MENU MANAJEMEN MAHASISWA =====\n");
-    printf("1. Tambah Mahasiswa di Awal\n");
-    printf("2. Tambah Mahasiswa di Akhir\n");
-    printf("3. Hapus Mahasiswa dari Awal\n");
-    printf("4. Hapus Mahasiswa dari Akhir\n");
-    printf("5. Cari Mahasiswa\n");
-    printf("6. Tampilkan Semua Mahasiswa\n");
-    printf("7. Urutkan Data\n");
-    printf("8. Hapus Semua Data\n");
-    printf("9. Keluar\n");
-    printf("Pilihan Anda: ");
+    printf("\n===== MENU Manejemen Mahasiswa =====\n");
+    printf("1. Tambah Data\n");
+    printf("2. Lihat Jumlah Mahasiswa\n");
+    printf("3. Sorting mahasiswa\n");
+    printf("4. Menyalin nilai diatas 70\n");
+    printf("5. Lihat Data yang Disalin\n");
+    printf("6. Hapus Duplikat\n");
+    printf("7. Hapus Semua Data\n");
+    printf("0. Keluar\n");
+    printf("Pilihan: ");
 }
 
 // Menampilkan submenu untuk pengurutan
